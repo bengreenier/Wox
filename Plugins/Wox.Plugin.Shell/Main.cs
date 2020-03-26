@@ -295,15 +295,19 @@ namespace Wox.Plugin.Shell
                     _keyboardSimulator.ModifiedKeyStroke(VirtualKeyCode.LWIN, VirtualKeyCode.CONTROL);
                     return false;
                 }
-                if (_settings.ReplaceStartKey && (vkcode == (int)Keys.LWin || vkcode == (int)Keys.RWin))
+                if (_settings.ReplaceStartKey
+                    && (vkcode == (int)Keys.LWin || vkcode == (int)Keys.RWin)
+                    && !state.AltPressed
+                    && !state.CtrlPressed
+                    && !state.ShiftPressed)
                 {
-                    // basically become our own hotkey
+                    // become our own hotkey
                     if (keyevent == (int)KeyEvent.WM_KEYUP)
                     {
                         this._context.API.ToggleApp();
                     }
 
-                    // do no CallNextHookEx 
+                    // do no CallNextHookEx (bye start menu)
                     return false;
                 }
             }
