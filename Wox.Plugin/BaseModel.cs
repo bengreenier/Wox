@@ -5,7 +5,7 @@ using PropertyChanged;
 
 namespace Wox.Plugin
 {
-    [ImplementPropertyChanged]
+    [AddINotifyPropertyChangedInterface]
     public class BaseModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
