@@ -80,6 +80,16 @@ namespace Wox
             _mainVM.MainWindowVisibility = Visibility.Visible;
         }
 
+        public void ToggleApp()
+        {
+            _mainVM.ToggleApp();
+        }
+
+        public void SetBuiltinHotkey(bool state)
+        {
+            _mainVM.SetBuiltinHotkey(state);
+        }
+
         public void ShowMsg(string title, string subTitle = "", string iconPath = "")
         {
             Application.Current.Dispatcher.Invoke(() =>

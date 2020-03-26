@@ -507,6 +507,21 @@ namespace Wox.ViewModel
         }
         #region Hotkey
 
+        public void SetBuiltinHotkey(bool state)
+        {
+            var visibilityHotkey = _settings.Hotkey;
+            if (state)
+            {
+                // enable
+                SetHotkey(visibilityHotkey, OnHotkey);
+            }
+            else
+            {
+                // disable
+                RemoveHotkey(visibilityHotkey);
+            }
+        }
+
         private void SetHotkey(string hotkeyStr, EventHandler<HotkeyEventArgs> action)
         {
             var hotkey = new HotkeyModel(hotkeyStr);
@@ -532,7 +547,14 @@ namespace Wox.ViewModel
         {
             if (!string.IsNullOrEmpty(hotkeyStr))
             {
-                HotkeyManager.Current.Remove(hotkeyStr);
+                try
+                {
+                    HotkeyManager.Current.Remove(hotkeyStr);
+                }
+                catch (Exception)
+                {
+                    // swallow errors
+                }
             }
         }
 
@@ -568,25 +590,7 @@ namespace Wox.ViewModel
         {
             if (!ShouldIgnoreHotkeys())
             {
-
-                if (_settings.LastQueryMode == LastQueryMode.Empty)
-                {
-                    ChangeQueryText(string.Empty);
-                }
-                else if (_settings.LastQueryMode == LastQueryMode.Preserved)
-                {
-                    LastQuerySelected = true;
-                }
-                else if (_settings.LastQueryMode == LastQueryMode.Selected)
-                {
-                    LastQuerySelected = false;
-                }
-                else
-                {
-                    throw new ArgumentException($"wrong LastQueryMode: <{_settings.LastQueryMode}>");
-                }
-
-                ToggleWox();
+                ToggleApp();
                 e.Handled = true;
             }
         }
@@ -606,6 +610,28 @@ namespace Wox.ViewModel
         #endregion
 
         #region Public Methods
+
+        public void ToggleApp()
+        {
+            if (_settings.LastQueryMode == LastQueryMode.Empty)
+            {
+                ChangeQueryText(string.Empty);
+            }
+            else if (_settings.LastQueryMode == LastQueryMode.Preserved)
+            {
+                LastQuerySelected = true;
+            }
+            else if (_settings.LastQueryMode == LastQueryMode.Selected)
+            {
+                LastQuerySelected = false;
+            }
+            else
+            {
+                throw new ArgumentException($"wrong LastQueryMode: <{_settings.LastQueryMode}>");
+            }
+
+            ToggleWox();
+        }
 
         public void Save()
         {

@@ -3,6 +3,7 @@
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
     <system:String x:Key="wox_plugin_cmd_relace_winr">取代 Win+R</system:String>
+    <system:String x:Key="wox_plugin_cmd_relace_startkey">取代 Win</system:String>
     <system:String x:Key="wox_plugin_cmd_leave_cmd_open">執行後不關閉命令提示字元視窗</system:String>
     <system:String x:Key="wox_plugin_cmd_plugin_name">命令提示字元</system:String>
     <system:String x:Key="wox_plugin_cmd_plugin_description">提供從 Wox 中執行命令提示字元的功能，指令應該以>開頭</system:String>

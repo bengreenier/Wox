@@ -271,6 +271,12 @@ namespace Wox.Plugin.Shell
         {
             this._context = context;
             context.API.GlobalKeyboardEvent += API_GlobalKeyboardEvent;
+
+            // on boot, if we're replacing win, disable the hotkey
+            if (_settings.ReplaceStartKey)
+            {
+                context.API.SetBuiltinHotkey(false);
+            }
         }
 
         bool API_GlobalKeyboardEvent(int keyevent, int vkcode, SpecialKeyState state)
@@ -289,6 +295,17 @@ namespace Wox.Plugin.Shell
                     _keyboardSimulator.ModifiedKeyStroke(VirtualKeyCode.LWIN, VirtualKeyCode.CONTROL);
                     return false;
                 }
+                if (_settings.ReplaceStartKey && (vkcode == (int)Keys.LWin || vkcode == (int)Keys.RWin))
+                {
+                    // basically become our own hotkey
+                    if (keyevent == (int)KeyEvent.WM_KEYUP)
+                    {
+                        this._context.API.ToggleApp();
+                    }
+
+                    // do no CallNextHookEx 
+                    return false;
+                }
             }
             return true;
         }
@@ -301,7 +318,7 @@ namespace Wox.Plugin.Shell
 
         public Control CreateSettingPanel()
         {
-            return new CMDSetting(_settings);
+            return new CMDSetting(_settings, _context);
         }
 
         public string GetTranslatedPluginTitle()

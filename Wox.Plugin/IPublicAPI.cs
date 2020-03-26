@@ -58,6 +58,17 @@ namespace Wox.Plugin
         void ShowApp();
 
         /// <summary>
+        /// Toggle vox visibility
+        /// </summary>
+        void ToggleApp();
+
+        /// <summary>
+        /// Enable or disable built-in hotkey support
+        /// </summary>
+        /// <param name="state">enabled state</param>
+        void SetBuiltinHotkey(bool state);
+
+        /// <summary>
         /// Show message box
         /// </summary>
         /// <param name="title">Message title</param>

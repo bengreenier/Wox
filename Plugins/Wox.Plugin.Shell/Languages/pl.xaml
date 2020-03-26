@@ -3,6 +3,7 @@
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
     <system:String x:Key="wox_plugin_cmd_relace_winr">Zastąp Win+R</system:String>
+    <system:String x:Key="wox_plugin_cmd_relace_startkey">Zastąp Win</system:String>
     <system:String x:Key="wox_plugin_cmd_leave_cmd_open">Nie zamykaj wiersza poleceń po wykonaniu polecenia</system:String>
     <system:String x:Key="wox_plugin_cmd_plugin_name">Wiersz poleceń</system:String>
     <system:String x:Key="wox_plugin_cmd_plugin_description">Pozwala wykonywać komend wiersza polecania z Woxa. Polecania zaczynają się od ></system:String>
